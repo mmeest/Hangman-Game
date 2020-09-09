@@ -125,6 +125,15 @@
         var word = words[Math.floor(Math.random()*words.length)];
         word = word.toUpperCase();
         console.log(word);
+
+        // use Enter key on text input to play 
+        var input = document.getElementById("userInput");
+        input.addEventListener("keyup", function(event) {
+            if (event.keyCode === 13) {
+                event.preventDefault();
+                document.getElementById("okButton").click();
+            }
+        });
         
         var userChar = "";
         function testLetter(){
