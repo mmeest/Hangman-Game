@@ -43,6 +43,9 @@
         #solution{
             visibility: hidden;
         }
+        #guessLabel{
+            padding: 20px;
+        }
     </style>
     
 </head>
@@ -69,7 +72,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td width="10%" align="right" class="label">&nbsp;Guess:</td>
+                        <td width="10%" align="right" class="label" id="guessLabel">&nbsp;Guess:</td>
                         <td width="90%" id="guess">&nbsp;
                             <input type="text" id="userInput" maxlength="1" size="1" autocomplete="off" autofocus>
                             <button type="button" onclick="testLetter()" id="okButton">OK</button>
@@ -172,6 +175,7 @@
 
                 if(word == emptyWord){
                     document.getElementById("okButton").style.visibility = "hidden"; 
+                    document.getElementById("guess").style.display = "none";
                     document.getElementById("messages").innerHTML = "You Win!";
                 }
 
@@ -252,6 +256,7 @@
                 ctx.lineTo(110, 170);
                 ctx.stroke();
                 document.getElementById("okButton").style.visibility = "hidden"; 
+                document.getElementById("guess").style.display = "none";
                 document.getElementById("solution").style.visibility = "visible";
                 document.getElementById("messages").innerHTML = "Game Over!";
             }                
