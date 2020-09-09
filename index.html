@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hangman</title>
+    <style>
+        *{
+            background-color: bisque;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: xx-large;
+            font-weight: 700;
+            text-transform: uppercase;
+            text-shadow: 1px 1px 2px #aeaee4;
+        }
+        canvas{
+            background-color: antiquewhite;
+            box-shadow: 10px 10px 5px #aaaaaa;
+            border-radius: 30px;
+        }
+        button{
+            background-color: antiquewhite;
+            box-shadow: 4px 4px 3px #aaaaaa;
+            border-radius: 10px;
+            border-radius: 30px;
+            padding: 10px;
+            padding-right: 15px;
+            padding-left: 15px;
+        }
+        input{
+            border-radius: 30px;
+            padding: 7px;
+        }
+        .label, button{
+            color: rgb(11, 11, 116);
+        }
+        #userInput{
+            text-align: center;
+        }
+        #messages{
+            text-align: center;
+        }
+        #solution{
+            visibility: hidden;
+        }
+    </style>
+    
+</head>
+<body>
+    <table border="0" width="100%">
+        <tr>
+            <td colspan="2">
+            <p align="center">&nbsp;Hangman</td>
+        </tr>
+        <tr>
+            <td width="240px">&nbsp; 
+                <canvas id="myCanvas" width="200" height="300"></canvas>
+            </td>
+            <td>&nbsp;
+                <table border="0" width="100%">
+                    <tr>
+                        <td width="10%" align="right" class="label">&nbsp;Word:</td>
+                        <td width="90%" id="word">&nbsp;_ _ _ _ _ _ _ _ _ _</td>
+                    </tr>
+                    <tr>
+                        <td width="10%" align="right" class="label">
+                            <button type="button" onClick="solution();" id="solution">Solution:</button></td>
+                        <td width="90%" id="answer">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="10%" align="right" class="label">&nbsp;Guess:</td>
+                        <td width="90%" id="guess">&nbsp;
+                            <input type="text" id="userInput" maxlength="1" size="1" autocomplete="off" autofocus>
+                            <button type="button" onclick="testLetter()" id="okButton">OK</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="10%" align="right" class="label">&nbsp;Guessed:</td>
+                        <td width="90%" id="miss">&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td width="10%" align="right" class="label">&nbsp;Left:</td>
+                        <td width="90%" id="left">&nbsp;7</td>
+                    </tr>                    
+                    <tr>
+                        <td width="10%" align="right" class="label">&nbsp;</td>
+                        <td width="90%" id="newGame">
+                        <button type="button" onClick="window.location.reload();" id="newGame">New Game</button></td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" id="messages">Guess a letter in the word!
+            <p align="center">&nbsp;</td>
+        </tr>
+    </table>
+
+    <script>
+        var c = document.getElementById("myCanvas");
+        var ctx  = c.getContext("2d");
+
+        var guessNumber = 0;    
+        var wrongGuesses = 0;   // for drawing
+        var emptyWord = "__________";
+        var printout = "";
+        var alphabet = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", 
+            "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
+        var englishAlphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        var missedLetters = [];
+        var guessedLetters = "";
+        var words = ["absolutely", "accessible", "activities", "additional", "affordable", "apparently", "appearance",
+            "background", "basketball", "candidates", "categories", "challenges", "collection", "commission", "commitment",
+            "comparsion", "completely", "conference", "connection", "consistent", "contribute", "conversion", "definition",
+            "department", "depression", "determined", "developing", "difference", "discussion", "efficency", "electrical",
+            "electronic", "enterprise", "evaluation", "foundation", "frequently", "functional", "generation", "historical",
+            "identified", "importance", "impossible", "impressive", "increasing", "incredible", "individual", "industrial",
+            "innovative", "interested", "investment", "leadership", "literature", "medication", "membership", "originally",
+            "percentage", "performing", "personally", "population", "prevention", "previously", "production", "protection",
+            "reasonable", "recognized", "regardless", "relatively", "represents", "resolution", "restaurant", "scientific",
+            "specialist", "statistics", "strategies", "successful", "supporting", "techniques", "technology", "television",
+            "transition", "ultimately", "understand", "university", "vegetables"];
+
+        var word = words[Math.floor(Math.random()*words.length)];
+        word = word.toUpperCase();
+        console.log(word);
+        
+        var userChar = "";
+        function testLetter(){
+            var userChar = document.getElementById("userInput").value.toUpperCase();
+            console.log(userChar);
+            document.getElementById('userInput').value = "";
+            document.getElementById("userInput").focus();
+
+            if(userChar == "" || userChar == " "){
+                document.getElementById("messages").innerHTML = "Insert Character!";
+            } else if(!(englishAlphabet.includes(userChar))){
+                document.getElementById("messages").innerHTML = "Illegal Character!";
+            } else if (guessedLetters.includes(userChar)){
+                document.getElementById("messages").innerHTML = "Already Selected!";
+            } else if (word.includes(userChar)){
+                for (var i = 0; i < word.length; i++) {
+                    console.log(word.charAt(i));
+                    if(word.charAt(i) == userChar){
+                        console.log("jehhuu");
+                        
+                        emptyWord = emptyWord.substring(0, i) + word.charAt(i) + emptyWord.substring(i + 1);
+                        console.log(emptyWord.substring(0, i));
+                        console.log(word.charAt(i));
+                        console.log(emptyWord.substring(i + 1));
+                    }
+                }
+
+                
+                printout = emptyWord.split("").join(" ");
+                console.log(emptyWord);
+                
+                document.getElementById("word").innerHTML = printout;
+                document.getElementById("messages").innerHTML = "Good Guess!";
+                guessedLetters += userChar;
+                document.getElementById("miss").innerHTML = alphabet_order(guessedLetters);
+
+                if(word == emptyWord){
+                    document.getElementById("okButton").style.visibility = "hidden"; 
+                    document.getElementById("messages").innerHTML = "You Win!";
+                }
+
+            } else {                
+                console.log(word);
+                console.log(typeof(word));
+                console.log(userChar);
+                console.log(typeof(userChar));
+                console.log(emptyWord);
+                document.getElementById("messages").innerHTML = "Bad Guess!";
+                wrongGuesses += 1;
+                drawing(wrongGuesses);
+                guessedLetters += userChar;
+                document.getElementById("left").innerHTML = 7 - wrongGuesses;
+                document.getElementById("miss").innerHTML = alphabet_order(guessedLetters);
+            }
+
+            
+        }
+
+        function alphabet_order(str)
+            {
+                return str.split('').sort().join('');
+            }
+
+        function drawing(wrongGuesses){
+            if(wrongGuesses == 1){
+                // hanger
+                ctx.lineWidth = 7;
+                ctx.moveTo(20, 260);
+                ctx.lineTo(180, 260);
+                ctx.moveTo(160, 260);
+                ctx.lineTo(160, 50);
+                ctx.lineTo(80, 50);
+                ctx.lineTo(80, 60);
+                ctx.stroke();
+            }                
+            
+            if(wrongGuesses == 2){
+                // head
+                ctx.lineWidth = 3;
+                ctx.beginPath();
+                ctx.arc(80, 70, 10, 0, 2 * Math.PI);
+                ctx.stroke(); 
+            }                
+
+            if(wrongGuesses == 3){
+                // body
+                ctx.moveTo(80, 80);
+                ctx.lineTo(80, 140);
+                ctx.stroke();
+            }                
+
+            if(wrongGuesses == 4){
+                // right arm
+                ctx.moveTo(80, 90);
+                ctx.lineTo(50, 110);
+                ctx.stroke();
+            }                
+
+            if(wrongGuesses == 5){
+                // left arm
+                ctx.moveTo(80, 90);
+                ctx.lineTo(110, 110);
+                ctx.stroke();
+            }                
+
+            if(wrongGuesses == 6){
+                // right leg
+                ctx.moveTo(80, 140);
+                ctx.lineTo(50, 170);
+                ctx.stroke();
+            }                
+
+            if(wrongGuesses == 7){
+                // left leg
+                ctx.moveTo(80, 140);
+                ctx.lineTo(110, 170);
+                ctx.stroke();
+                document.getElementById("okButton").style.visibility = "hidden"; 
+                document.getElementById("solution").style.visibility = "visible";
+                document.getElementById("messages").innerHTML = "Game Over!";
+            }                
+        }  
+
+        function solution(){
+            document.getElementById("answer").innerHTML = word;
+        }      
+    </script>
+</body>
+</html>
