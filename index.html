@@ -6,12 +6,15 @@
     <title>Hangman</title>
     <style>
         *{
-            background-color: rgb(201, 164, 119);
+            /* background-color: rgb(201, 164, 119); */
             font-family: Arial, Helvetica, sans-serif;
             font-size: xx-large;
             font-weight: 700;
             text-transform: uppercase;
             text-shadow: 1px 1px 2px #9191c2;
+        }
+        body{
+            background-image: radial-gradient(rgb(245, 236, 218), rgb(94, 58, 14));
         }
         canvas{
             background-color: rgb(229, 196, 151);
@@ -19,6 +22,7 @@
             border: 3px solid rgb(52, 52, 59);
             border-radius: 30px;
             background-image: radial-gradient(rgb(247, 227, 199), rgb(229, 196, 151));
+            margin-left: 35px;
         }
         button{
             background-color:rgb(209, 235, 245);
@@ -81,17 +85,17 @@
     <table border="0" width="100%">
         <tr id="title">
             <td colspan="2">
-            <p align="center">&nbsp;Hangman</td>
+            <p align="center">Hangman</td>
         </tr>
         <tr>
             <td width="240px">
                 <canvas id="myCanvas" width="200" height="300"></canvas>
             </td>
-            <td>&nbsp;
+            <td>
                 <table border="0" width="100%">
                     <tr>
-                        <td width="10%" align="right" class="label">&nbsp;Word:</td>
-                        <td width="90%" id="word" class="textBox">&nbsp;_ _ _ _ _ _ _ _ _ _</td>
+                        <td width="10%" align="right" class="label">Word:</td>
+                        <td width="90%" id="word" class="textBox">_ _ _ _ _ _ _ _ _ _</td>
                     </tr>
                     <tr>
                         <td width="10%" align="right" class="label">
@@ -100,27 +104,27 @@
                         </td>
                     </tr>
                     <tr>
-                        <td width="10%" align="right" class="label" id="guessLabel">&nbsp;Guess:</td>
-                        <td width="90%" id="guess">&nbsp;
+                        <td width="10%" align="right" class="label" id="guessLabel">Guess:</td>
+                        <td width="90%" id="guess">
                             <input type="text" id="userInput" maxlength="1" size="1" autocomplete="off" autofocus>
                             <button type="button" onclick="testLetter()" id="okButton">OK</button>
                             <!-- <button type="button" onClick="window.location.reload();" id="nG" style = "visibility:hidden">New Game</button> -->
                         </td>
                     </tr>
                     <tr>
-                        <td width="10%" align="right" class="label">&nbsp;Guessed:</td>
-                        <td width="90%" id="miss" class="textBox">&nbsp;</td>
+                        <td width="10%" align="right" class="label">Guessed:</td>
+                        <td width="90%" id="miss" class="textBox"></td>
                     </tr>
                     <tr>
-                        <td width="10%" align="right" class="label">&nbsp;Left:</td>
-                        <td width="90%" id="left" class="textBox">&nbsp;7</td>
+                        <td width="10%" align="right" class="label">Left:</td>
+                        <td width="90%" id="left" class="textBox">7</td>
                     </tr>  
                     <tr>
-                        <td width="10%" align="right" class="label">&nbsp;Points:</td>
-                        <td width="90%" id="points" class="textBox">&nbsp;0 / 100</td>
+                        <td width="10%" align="right" class="label">Points:</td>
+                        <td width="90%" id="points" class="textBox">0 / 100</td>
                     </tr>               
                     <tr>
-                        <td width="10%" align="right" class="label">&nbsp;</td>
+                        <td width="10%" align="right" class="label"></td>
                         <td width="90%" id="newGame">
                         <button type="button" onClick="window.location.reload();" id="newGame">New Game</button></td>
                     </tr>
@@ -129,7 +133,7 @@
         </tr>
         <tr>
             <td colspan="2" id="messages">Guess a letter in the word!
-            <p align="center">&nbsp;</td>
+            <p align="center"></td>
         </tr>
     </table>
 
