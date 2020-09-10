@@ -12,6 +12,9 @@
             font-weight: 700;
             text-transform: uppercase;
             text-shadow: 1px 1px 2px #9191c2;
+        }        
+        html{
+            height: 100%;   /* for background not to repeat */
         }
         body{
             background-image: radial-gradient(rgb(245, 236, 218), rgb(94, 58, 14));
@@ -44,6 +47,7 @@
             color: rgb(11, 11, 116);
         }
         .textBox{
+            width: 30%;
             background-color:rgb(187, 51, 51);
             background-image: linear-gradient(to bottom right, antiquewhite , rgb(206, 166, 118));
             border-radius: 9px;
@@ -95,17 +99,17 @@
                 <table border="0" width="100%">
                     <tr>
                         <td width="10%" align="right" class="label">Word:</td>
-                        <td width="90%" id="word" class="textBox">_ _ _ _ _ _ _ _ _ _</td>
+                        <td width="50%" id="word" class="textBox">_ _ _ _ _ _ _ _ _ _</td>
                     </tr>
                     <tr>
                         <td width="10%" align="right" class="label">
                             <button type="button" onClick="solution();" id="solution">Solution:</button></td>
-                        <td width="90%" id="answer" class="textBox">
+                        <td width="50%" id="answer" class="textBox">
                         </td>
                     </tr>
                     <tr>
                         <td width="10%" align="right" class="label" id="guessLabel">Guess:</td>
-                        <td width="90%" id="guess">
+                        <td width="50%" id="guess">
                             <input type="text" id="userInput" maxlength="1" size="1" autocomplete="off" autofocus>
                             <button type="button" onclick="testLetter()" id="okButton">OK</button>
                             <!-- <button type="button" onClick="window.location.reload();" id="nG" style = "visibility:hidden">New Game</button> -->
@@ -113,19 +117,19 @@
                     </tr>
                     <tr>
                         <td width="10%" align="right" class="label">Guessed:</td>
-                        <td width="90%" id="miss" class="textBox"></td>
+                        <td width="50%" id="miss" class="textBox"></td>
                     </tr>
                     <tr>
                         <td width="10%" align="right" class="label">Left:</td>
-                        <td width="90%" id="left" class="textBox">7</td>
+                        <td width="50%" id="left" class="textBox">7</td>
                     </tr>  
                     <tr>
                         <td width="10%" align="right" class="label">Points:</td>
-                        <td width="90%" id="points" class="textBox">0 / 100</td>
+                        <td width="50%" id="points" class="textBox">0 / 100</td>
                     </tr>               
                     <tr>
                         <td width="10%" align="right" class="label"></td>
-                        <td width="90%" id="newGame">
+                        <td width="50%" id="newGame">
                         <button type="button" onClick="window.location.reload();" id="newGame">New Game</button></td>
                     </tr>
                 </table>
@@ -323,7 +327,7 @@
                 ctx.stroke();
 
                 if(totalPoints > 0){
-                    totalPoints = totalPoints / 10;
+                    totalPoints = totalPoints / 2;
                     document.getElementById("points").innerHTML = totalPoints + " / 100";
                 }
 
