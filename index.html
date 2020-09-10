@@ -25,7 +25,7 @@
             border: 3px solid rgb(52, 52, 59);
             border-radius: 30px;
             background-image: radial-gradient(rgb(247, 227, 199), rgb(229, 196, 151));
-            margin-left: 35px;
+            margin-left: 35%;
         }
         button{
             background-color:rgb(209, 235, 245);
@@ -96,19 +96,19 @@
                 <canvas id="myCanvas" width="200" height="300"></canvas>
             </td>
             <td>
-                <table border="0" width="100%">
+                <table border="0" width="85%">
                     <tr>
-                        <td width="10%" align="right" class="label">Word:</td>
+                        <td width="30%" align="right" class="label">Word:</td>
                         <td width="50%" id="word" class="textBox">_ _ _ _ _ _ _ _ _ _</td>
                     </tr>
                     <tr>
-                        <td width="10%" align="right" class="label">
+                        <td width="30%" align="right" class="label">
                             <button type="button" onClick="solution();" id="solution">Solution:</button></td>
                         <td width="50%" id="answer" class="textBox">
                         </td>
                     </tr>
                     <tr>
-                        <td width="10%" align="right" class="label" id="guessLabel">Guess:</td>
+                        <td width="30%" align="right" class="label" id="guessLabel">Guess:</td>
                         <td width="50%" id="guess">
                             <input type="text" id="userInput" maxlength="1" size="1" autocomplete="off" autofocus>
                             <button type="button" onclick="testLetter()" id="okButton">OK</button>
@@ -116,19 +116,19 @@
                         </td>
                     </tr>
                     <tr>
-                        <td width="10%" align="right" class="label">Guessed:</td>
+                        <td width="30%" align="right" class="label">Guessed:</td>
                         <td width="50%" id="miss" class="textBox"></td>
                     </tr>
                     <tr>
-                        <td width="10%" align="right" class="label">Left:</td>
+                        <td width="30%" align="right" class="label">Left:</td>
                         <td width="50%" id="left" class="textBox">7</td>
                     </tr>  
                     <tr>
-                        <td width="10%" align="right" class="label">Points:</td>
+                        <td width="30%" align="right" class="label">Points:</td>
                         <td width="50%" id="points" class="textBox">0 / 100</td>
                     </tr>               
                     <tr>
-                        <td width="10%" align="right" class="label"></td>
+                        <td width="30%" align="right" class="label"></td>
                         <td width="50%" id="newGame">
                         <button type="button" onClick="window.location.reload();" id="newGame">New Game</button></td>
                     </tr>
