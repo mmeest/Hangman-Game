@@ -57,7 +57,7 @@
         #messages{
             text-align: center;
         }
-        #solution{
+        #solution, #answer{
             visibility: hidden;
         }
         #guessLabel{
@@ -295,9 +295,16 @@
                 ctx.moveTo(80, 140);
                 ctx.lineTo(110, 170);
                 ctx.stroke();
+
+                if(totalPoints > 0){
+                    totalPoints = totalPoints / 10;
+                    document.getElementById("points").innerHTML = totalPoints + " / 100";
+                }
+
                 document.getElementById("okButton").style.visibility = "hidden"; 
                 document.getElementById("guess").style.display = "none";
                 document.getElementById("solution").style.visibility = "visible";
+                document.getElementById("answer").style.visibility = "visible";
                 document.getElementById("messages").innerHTML = "Game Over!";
             }                
         }  
