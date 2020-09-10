@@ -6,7 +6,7 @@
     <title>Hangman</title>
     <style>
         *{
-            background-color: bisque;
+            background-color: rgb(201, 164, 119);
             font-family: Arial, Helvetica, sans-serif;
             font-size: xx-large;
             font-weight: 700;
@@ -14,18 +14,21 @@
             text-shadow: 1px 1px 2px #aeaee4;
         }
         canvas{
-            background-color: antiquewhite;
-            box-shadow: 10px 10px 5px #aaaaaa;
+            background-color: rgb(229, 196, 151);
+            box-shadow: 10px 10px 5px #644b4b;
+            border: 3px solid rgb(52, 52, 59);
             border-radius: 30px;
+            background-image: radial-gradient(rgb(247, 227, 199), rgb(229, 196, 151));
         }
         button{
-            background-color: antiquewhite;
+            background-color:rgb(204, 236, 247);
             box-shadow: 4px 4px 3px #aaaaaa;
             border-radius: 10px;
             border-radius: 30px;
             padding: 10px;
             padding-right: 15px;
             padding-left: 15px;
+            margin: 5px;
         }
         input{
             border-radius: 30px;
@@ -34,8 +37,18 @@
         .label, button{
             color: rgb(11, 11, 116);
         }
+        .textBox{
+            background-color:rgb(187, 51, 51);
+            background-image: linear-gradient(to right, antiquewhite , rgb(206, 166, 118));
+            border-radius: 9px;
+            padding-left: 12px;
+            border-style: solid none solid solid;
+            border-color: rgb(52, 52, 59);
+            border-width: 1px;
+        }
         #userInput{
             text-align: center;
+            background-color: antiquewhite;
         }
         #messages{
             text-align: center;
@@ -46,6 +59,7 @@
         #guessLabel{
             padding: 20px;
         }
+
     </style>
     
 </head>
@@ -68,7 +82,7 @@
                     <tr>
                         <td width="10%" align="right" class="label">
                             <button type="button" onClick="solution();" id="solution">Solution:</button></td>
-                        <td width="90%" id="answer">
+                        <td width="90%" id="answer" class="textBox">
                         </td>
                     </tr>
                     <tr>
@@ -76,16 +90,21 @@
                         <td width="90%" id="guess">&nbsp;
                             <input type="text" id="userInput" maxlength="1" size="1" autocomplete="off" autofocus>
                             <button type="button" onclick="testLetter()" id="okButton">OK</button>
+                            <!-- <button type="button" onClick="window.location.reload();" id="nG" style = "visibility:hidden">New Game</button> -->
                         </td>
                     </tr>
                     <tr>
                         <td width="10%" align="right" class="label">&nbsp;Guessed:</td>
-                        <td width="90%" id="miss">&nbsp;</td>
+                        <td width="90%" id="miss" class="textBox">&nbsp;</td>
                     </tr>
                     <tr>
                         <td width="10%" align="right" class="label">&nbsp;Left:</td>
-                        <td width="90%" id="left">&nbsp;7</td>
-                    </tr>                    
+                        <td width="90%" id="left" class="textBox">&nbsp;7</td>
+                    </tr>  
+                    <tr>
+                        <td width="10%" align="right" class="label">&nbsp;Points:</td>
+                        <td width="90%" id="points" class="textBox">&nbsp;0 / 100</td>
+                    </tr>               
                     <tr>
                         <td width="10%" align="right" class="label">&nbsp;</td>
                         <td width="90%" id="newGame">
@@ -103,6 +122,9 @@
     <script>
         var c = document.getElementById("myCanvas");
         var ctx  = c.getContext("2d");
+
+        var points = 10;
+        var totalPoints = 0;
 
         var guessNumber = 0;    
         var wrongGuesses = 0;   // for drawing
@@ -137,6 +159,14 @@
                 document.getElementById("okButton").click();
             }
         });
+
+        /* var input = document.getElementById("userInput");
+        input.addEventListener("keyup", function(event) {
+            if (event.keyCode === 32) {
+                event.preventDefault();
+                document.getElementById("nG").click();
+            }
+        }); */
         
         var userChar = "";
         function testLetter(){
@@ -173,6 +203,9 @@
                 guessedLetters += userChar;
                 document.getElementById("miss").innerHTML = alphabet_order(guessedLetters);
 
+                totalPoints += points;
+                document.getElementById("points").innerHTML = totalPoints + " / 100";
+
                 if(word == emptyWord){
                     document.getElementById("okButton").style.visibility = "hidden"; 
                     document.getElementById("guess").style.display = "none";
@@ -191,6 +224,8 @@
                 guessedLetters += userChar;
                 document.getElementById("left").innerHTML = 7 - wrongGuesses;
                 document.getElementById("miss").innerHTML = alphabet_order(guessedLetters);
+
+                points -= 1;
             }
 
             
