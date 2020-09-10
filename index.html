@@ -11,7 +11,7 @@
             font-size: xx-large;
             font-weight: 700;
             text-transform: uppercase;
-            text-shadow: 1px 1px 2px #aeaee4;
+            text-shadow: 1px 1px 2px #9191c2;
         }
         canvas{
             background-color: rgb(229, 196, 151);
@@ -22,7 +22,8 @@
         }
         button{
             background-color:rgb(209, 235, 245);
-            box-shadow: 4px 4px 3px #aaaaaa;
+            background-image: radial-gradient(rgb(245, 230, 209), rgb(209, 168, 109));
+            box-shadow: 7px 7px 4px #524545;
             border-radius: 10px;
             border-radius: 30px;
             padding: 10px;
@@ -33,6 +34,7 @@
         input{
             border-radius: 30px;
             padding: 7px;
+            box-shadow: 4px 4px 3px #644b4b inset;
         }
         .label, button{
             color: rgb(11, 11, 116);
@@ -42,9 +44,17 @@
             background-image: linear-gradient(to right, antiquewhite , rgb(206, 166, 118));
             border-radius: 9px;
             padding-left: 12px;
+            padding-top: 6px;
+            padding-bottom: 6px;
             border-style: solid none solid solid;
             border-color: rgb(52, 52, 59);
             border-width: 1px;
+            box-shadow: 4px 4px 3px #644b4b inset;
+            text-shadow: 3px 3px 2px #b49696;
+        }
+        #title{
+            margin-bottom: -120px;
+            padding: -20px;
         }
         #word{
             padding-top: 5px;
@@ -69,12 +79,12 @@
 </head>
 <body>
     <table border="0" width="100%">
-        <tr>
+        <tr id="title">
             <td colspan="2">
             <p align="center">&nbsp;Hangman</td>
         </tr>
         <tr>
-            <td width="240px">&nbsp; 
+            <td width="240px">
                 <canvas id="myCanvas" width="200" height="300"></canvas>
             </td>
             <td>&nbsp;
@@ -185,6 +195,8 @@
             } else if(!(englishAlphabet.includes(userChar))){
                 document.getElementById("messages").innerHTML = "Illegal Character!";
             } else if (guessedLetters.includes(userChar)){
+                totalPoints -= 2;
+                document.getElementById("points").innerHTML = totalPoints + " / 100";
                 document.getElementById("messages").innerHTML = "Already Selected!";
             } else if (word.includes(userChar)){
                 for (var i = 0; i < word.length; i++) {
@@ -227,6 +239,8 @@
                 wrongGuesses += 1;
                 drawing(wrongGuesses);
                 guessedLetters += userChar;
+                totalPoints -= 1;
+                document.getElementById("points").innerHTML = totalPoints + " / 100";
                 document.getElementById("left").innerHTML = 7 - wrongGuesses;
                 document.getElementById("miss").innerHTML = alphabet_order(guessedLetters);
 
