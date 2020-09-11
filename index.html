@@ -336,11 +336,23 @@
                 document.getElementById("solution").style.visibility = "visible";
                 document.getElementById("answer").style.visibility = "visible";
                 document.getElementById("messages").innerHTML = "Game Over!";
+
+                document.getElementById("myCanvas").style.transform = "rotate(7deg)";
             }                
         }  
 
+        var canvasRotation = -7;
+        var rotationText = ""
         function solution(){
+            rotationText = "rotate(" + canvasRotation + "deg)"
+            document.getElementById("myCanvas").style.transform = rotationText;
+            document.getElementById("solution").style.transform = "rotate(-7deg)";
             document.getElementById("answer").innerHTML = word;
+            if(canvasRotation < -360){
+                window.location.reload();
+            }
+
+            canvasRotation -= 7;
         }      
     </script>
 </body>
