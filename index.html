@@ -20,12 +20,13 @@
             background-image: radial-gradient(rgb(245, 236, 218), rgb(94, 58, 14));
         }
         canvas{
-            background-color: rgb(229, 196, 151);
+            /* background-color: rgb(229, 196, 151); */
             box-shadow: 10px 10px 5px #644b4b;
             border: 3px solid rgb(52, 52, 59);
             border-radius: 30px;
             background-image: radial-gradient(rgb(247, 227, 199), rgb(229, 196, 151));
             margin-left: 35%;
+            rotate: -7deg;
         }
         button{
             background-color:rgb(209, 235, 245);
@@ -98,7 +99,7 @@
             <td>
                 <table border="0" width="85%">
                     <tr>
-                        <td width="30%" align="right" class="label">Word:</td>
+                        <td width="30%" align="right" class="label" id="wordLabel">Word:</td>
                         <td width="50%" id="word" class="textBox">_ _ _ _ _ _ _ _ _ _</td>
                     </tr>
                     <tr>
@@ -190,6 +191,8 @@
                 document.getElementById("nG").click();
             }
         }); */
+        /* ctx.style.backgroundImage = 'radial-gradient(rgb(247, 227, 111), rgb(229, 196, 111))'; */
+        /* background-image: radial-gradient(rgb(247, 227, 199), rgb(229, 196, 151)); */
         
         var userChar = "";
         function testLetter(){
@@ -239,6 +242,10 @@
                     document.getElementById("okButton").style.visibility = "hidden"; 
                     document.getElementById("guess").style.display = "none";
                     document.getElementById("messages").innerHTML = "You Win!";
+
+                    document.getElementById("myCanvas").style.transform = "rotate(7deg)";
+                    ctx.fillStyle = "rgba(0, 255, 0, 0.1)";;
+                    ctx.fillRect(0, 0, 200, 300);
                 }
 
             } else {                
@@ -281,6 +288,7 @@
                 ctx.lineTo(160, 50);
                 ctx.lineTo(80, 50);
                 ctx.lineTo(80, 60);
+                /* ctx.strokeStyle = "#FF0000"; */
                 ctx.stroke();
             }                
             
@@ -337,18 +345,37 @@
                 document.getElementById("answer").style.visibility = "visible";
                 document.getElementById("messages").innerHTML = "Game Over!";
 
-                document.getElementById("myCanvas").style.transform = "rotate(7deg)";
+                document.getElementById("myCanvas").style.transform = "rotate(-7deg)";
+
+                document.getElementById("myCanvas").style.backgroundColor = 'rgba(158, 167, 184, 0.2)';
+
+                
+                /* ctx.style.backgroundColor = "red"; */
+
+                /* grd.addColorStop(0, "red");
+                var grd = ctx.createRadialGradient(75, 50, 5, 90, 60, 100);
+                grd.addColorStop(1, "white");
+                ctx.fillStyle = grd;
+                ctx.fillRect(10, 10, 150, 100);  */
+
+                ctx.fillStyle = "rgba(255, 0, 0, 0.1)";;
+                ctx.fillRect(0, 0, 200, 300);
+
             }                
         }  
 
-        var canvasRotation = -7;
+        var canvasRotation = -14;
         var rotationText = ""
         function solution(){
             rotationText = "rotate(" + canvasRotation + "deg)"
             document.getElementById("myCanvas").style.transform = rotationText;
-            document.getElementById("solution").style.transform = "rotate(-7deg)";
+            /* document.getElementById("wordLabel").style.transform = rotationText;
+            document.getElementById("solution").style.transform = "rotate(-7deg)"; */
             document.getElementById("answer").innerHTML = word;
-            if(canvasRotation < -360){
+            /* if(canvasRotation < -150){
+                document.getElementById("wordLabel").style.transform = rotationText;
+            } */
+            if(canvasRotation < -350){
                 window.location.reload();
             }
 
