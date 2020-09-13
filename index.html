@@ -26,7 +26,7 @@
             border-radius: 30px;
             background-image: radial-gradient(rgb(247, 227, 199), rgb(229, 196, 151));
             margin-left: 35%;
-            rotate: -7deg;
+            /* rotate: -7deg; */
         }
         button{
             background-color:rgb(209, 235, 245);
@@ -213,6 +213,9 @@
                 }
                 document.getElementById("points").innerHTML = totalPoints + " / 100";
                 document.getElementById("messages").innerHTML = "Already Selected!";
+
+                setTimeout(function(){ document.getElementById("miss").style.transform += "scale(1.25, 1.25)"; }, 100);
+                setTimeout(function(){ document.getElementById("miss").style.transform += "scale(0.8, 0.8)"; }, 500);
             } else if (word.includes(userChar)){
                 for (var i = 0; i < word.length; i++) {
                     console.log(word.charAt(i));
@@ -235,6 +238,9 @@
                 guessedLetters += userChar;
                 document.getElementById("miss").innerHTML = alphabet_order(guessedLetters);
 
+                setTimeout(function(){ document.getElementById("word").style.transform += "scale(1.25, 1.25)"; }, 100);
+                setTimeout(function(){ document.getElementById("word").style.transform += "scale(0.8, 0.8)"; }, 500);
+
                 totalPoints += points;
                 document.getElementById("points").innerHTML = totalPoints + " / 100";
 
@@ -244,8 +250,11 @@
                     document.getElementById("messages").innerHTML = "You Win!";
 
                     document.getElementById("myCanvas").style.transform = "rotate(7deg)";
+                    document.getElementById("myCanvas").style.transform += "scale(1.3, 1.3)";
                     ctx.fillStyle = "rgba(0, 255, 0, 0.1)";;
                     ctx.fillRect(0, 0, 200, 300);
+                    ctx.scale(2, 2);
+
                 }
 
             } else {                
@@ -266,6 +275,14 @@
                 document.getElementById("points").innerHTML = totalPoints + " / 100";
                 document.getElementById("left").innerHTML = 7 - wrongGuesses;
                 document.getElementById("miss").innerHTML = alphabet_order(guessedLetters);
+
+                /* setTimeout(function(){ document.getElementById("left").style.transform += "scale(1.25, 1.25)"; }, 100);
+                setTimeout(function(){ document.getElementById("left").style.transform += "scale(0.8, 0.8)"; }, 500); */
+
+                setTimeout(function(){ document.getElementById("myCanvas").style.transform += "scale(0.8, 0.8)"; }, 10);
+                setTimeout(function(){ document.getElementById("myCanvas").style.transform += "scale(1.25, 1.25)"; }, 500);
+
+                setTimeout(function(){ document.getElementById("myCanvas").style.transform += "rotate(-7deg)"; }, 900);
 
                 points -= 1;
             }
@@ -345,7 +362,8 @@
                 document.getElementById("answer").style.visibility = "visible";
                 document.getElementById("messages").innerHTML = "Game Over!";
 
-                document.getElementById("myCanvas").style.transform = "rotate(-7deg)";
+                /* document.getElementById("myCanvas").style.transform = "rotate(7deg)"; */
+                /* document.getElementById("myCanvas").style.transform += "scale(0.5, 0.5)"; */
 
                 document.getElementById("myCanvas").style.backgroundColor = 'rgba(158, 167, 184, 0.2)';
 
@@ -364,7 +382,7 @@
             }                
         }  
 
-        var canvasRotation = -14;
+        var canvasRotation = -56;
         var rotationText = ""
         function solution(){
             rotationText = "rotate(" + canvasRotation + "deg)"
