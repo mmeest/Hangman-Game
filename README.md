@@ -13,7 +13,7 @@ Classical Hangman Game written in HTML, CSS, JS
 * 'New Game' button
 * Hidden(at the beginning) 'Solution' field with button 
 * When game is lost, guessing input will be removed from UI
-* Rotating and color changing canvas with hangman drawing
+* Rotating, re-sizing and color changing canvas with hangman drawing
 
 # Calculating points:
 * Maximum for the game is 100 points.
