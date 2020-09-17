@@ -24,4 +24,4 @@ in one compact index.html file
 * By selecting a letter that is already selected, 2 points will be removed from total.
 * If player can't guess the word on total moves, the final points count will be divided by 2.
 
-# GOOD LUCK !
+## GOOD LUCK !
