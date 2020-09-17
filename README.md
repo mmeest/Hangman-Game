@@ -1,4 +1,4 @@
-<img src="Screenshot.jpg" width="400px">
+<img src="Screenshot.jpg" width="400px" align="center">
 
 # Hangman-Game
 Classical Hangman Game written in HTML, CSS, JS
