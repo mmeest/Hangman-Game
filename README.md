@@ -4,7 +4,7 @@
 Classical Hangman Game written in HTML, CSS, JS
 in one compact index.html file
 
-# Features:
+## Features:
 * Word for quessing
 * Inputfield with 'Submit'(OK) button
 * 'Enter' key keypress(as submit) to play the game
@@ -16,7 +16,7 @@ in one compact index.html file
 * When game is lost, guessing input will be removed from UI
 * Rotating, re-sizing and color changing canvas with hangman drawing
 
-# Calculating points:
+## Calculating points:
 * Maximum for the game is 100 points.
 * Minimum can be 0 points(calculation will never go below 0 points).
 * At the beginning of the game every right letter is worth 10 points.
