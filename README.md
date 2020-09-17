@@ -2,6 +2,7 @@
 
 # Hangman-Game
 Classical Hangman Game written in HTML, CSS, JS
+in one compact index.html file
 
 # Features:
 * Word for quessing
