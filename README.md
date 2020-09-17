@@ -1,3 +1,5 @@
+<img src="Screenshot.png" width="400px">
+
 # Hangman-Game
 Classical Hangman Game written in HTML, CSS, JS
 
