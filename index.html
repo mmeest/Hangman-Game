@@ -388,7 +388,7 @@
                 // if game is lost and there are more than 0 points,
                 // points are divided by 2
                 if(totalPoints > 0){
-                    totalPoints = totalPoints / 2;
+                    totalPoints = Math.floor(totalPoints / 2);
                     document.getElementById("points").innerHTML = totalPoints + " / 100";
                 }
 
