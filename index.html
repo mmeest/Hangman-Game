@@ -259,6 +259,7 @@
                 pointsTextboxColoring(totalPoints);
 
                 if(word == emptyWord){
+                    document.getElementById("guessLabel").style.visibility = "hidden"; 
                     document.getElementById("okButton").style.visibility = "hidden"; 
                     document.getElementById("guess").style.display = "none";
                     document.getElementById("messages").innerHTML = "You Win!";
