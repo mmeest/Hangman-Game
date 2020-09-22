@@ -15,6 +15,7 @@ in one compact index.html file
 * Hidden(at the beginning) 'Solution' field with button 
 * When game is lost, guessing input will be removed from UI
 * Rotating, re-sizing and color changing canvas with hangman drawing
+* Points textbox field background color depending on points: red -> green
 
 ## Calculating points:
 * Maximum for the game is 100 points.
