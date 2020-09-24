@@ -16,6 +16,13 @@ in one compact index.html file
 * When game is lost, guessing input will be removed from UI
 * Rotating, re-sizing and color changing canvas with hangman drawing
 * Points textbox field background color depending on points: red -> green
+* Hover on labes - zoom in effect
+* Hover on canvas - zoom in and canvas background color change
+* Hover on text output fields - text fields background color change
+* Hover on small triangle on left bottom corner - rotate screen back and forth
+* Tooltip - when hovering over 'HANGMAN' title
+* Tooltip - when hovering over text input field
+* Click on 'HANGMAN' title - fullscreen/exit fullscreen
 
 ## Calculating points:
 * Maximum for the game is 100 points.
