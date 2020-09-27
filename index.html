@@ -8,7 +8,7 @@
         *{
             /* background-color: rgb(201, 164, 119); */
             font-family: Arial, Helvetica, sans-serif;
-            font-size: xx-large;
+            font-size: x-large;
             font-weight: 700;
             text-transform: uppercase;
             text-shadow: 1px 1px 2px #9191c2;
@@ -26,6 +26,7 @@
             border-radius: 30px;
             background-image: radial-gradient(rgb(247, 227, 199), rgb(229, 196, 151));
             margin-left: 35%;
+            margin-top: -12%;
         }
         button{
             background-image: radial-gradient(rgb(245, 230, 209), rgb(209, 168, 109));
@@ -115,8 +116,9 @@
         }
         #messages{
             text-align: center;
+            margin-top: -6%;
         }
-        #solution, #answer{
+        #solution, #answer, #canvasLabel{
             visibility: hidden;
         }
         #guessLabel{
@@ -157,22 +159,53 @@
         .tooltip:hover .tooltiptext {
             visibility: visible;
         }
+        #canvasLabel{
+            margin: 14px;
+        }
+        #mainTable{
+            margin-top: -70px;
+            margin-bottom: -70px;
+        }
+        #pngBtn, #jpgBtn{
+            font-size: small;
+            font-weight: 700;
+        }
+        #canvasLabel{
+            font-size: large;
+        }
     </style>    
 </head>
 <body id="body">
     <table border="0" width="100%">
         <tr id="title">
             <td colspan="2">
-            <p class="tooltip" align="center">Hangman
+            <p class="tooltip" align="center" style="height: 5%;">Hangman
                 <span class="tooltiptext">F11 - Fullscreen ctrl+r - new game</span>
             </td>
         </tr>
         <tr>
-            <td width="240px">
-                <canvas id="myCanvas" width="200" height="300"></canvas>
+            <td width="240px" valign="top" align="center" width="30%">
+                <canvas id="myCanvas" width="200" height="300" class="tooltip" title="Click to save as image"></canvas>
+                    <div id="canvasLabel">
+                        Save Canvas as:      
+                    <table border="0" width="100%" id="canvasToImage" align="center">
+                        <tr>
+                            <td width="50%" align="center" valign="top">
+                                <img src="" id="imgPNG" width="100" height="150"
+                                style="float: center; border: 2px solid blue; border-radius: 16px;"><br>
+                                <button id="pngBtn">PNG</button>
+                            </td>
+                            <td width="50%" align="center" valign="top">
+                                <img src="" id="imgJPG" width="100" height="150"
+                                style="float: center; border: 2px solid blue; border-radius: 16px;"><br>
+                                <button id="jpgBtn">JPG</button>
+                            </td>
+                        </tr>
+                    </table>  
+                    </div>       
             </td>
-            <td>
-                <table border="0" width="70%">
+            <td width="70%">
+                <table border="0" width="70%" id="mainTable">
                     <tr>
                         <td width="30%" align="right" class="label" id="wordLabel">Word:</td>
                         <td width="50%" id="word" class="textBox">_ _ _ _ _ _ _ _ _ _</td>
@@ -214,13 +247,13 @@
             </td>
         </tr>
         <tr>
-            <td colspan="2" id="messages">Guess a letter in the word!
-                <br><br>
+            <td colspan="2" id="messages">
+                <div id="messages">Guess a letter in the word!</div>
                 <div id="rotate" onmouseover="rotate(this)" style="color:rgb(119, 13, 13)" 
                     style="width: 24px;">▼</div>
             <p align="center"></td>
         </tr>
-    </table>
+    </table>    
 
     <script>
         var c = document.getElementById("myCanvas");
@@ -482,6 +515,56 @@
                 rotation = 0;
             }
         }
+
+        // Canvas to image
+        const btnDisplay = document.querySelector("#myCanvas");
+        const btnDownload = document.querySelector("#btnDownload");
+        const imgPNG = document.querySelector("#imgPNG");
+        const imgJPG = document.querySelector("#imgJPG");
+
+        btnDisplay.addEventListener("click", function(){
+            document.getElementById("canvasLabel").style.visibility = "visible";
+            const dataURI = myCanvas.toDataURL();
+            const dataURI2 = myCanvas.toDataURL("image/jpg");
+
+            console.log(dataURI);
+            console.log(dataURI2);
+            imgPNG.src = dataURI;
+            imgJPG.src = dataURI2;
+        });
+
+        // save image as PNG button
+        pngBtn.addEventListener("click", function (){
+            // IE/Edge Support (PNG Only)
+            if (window.navigator.msSaveBlob){
+                window.navigator.msSaveBlob(myCanvas.msToBlob(), "canvas-image.png");
+            } else {
+                const a = document.createElement("a");
+
+                document.body.appendChild(a);
+                a.href = myCanvas.toDataURL();
+                a.download = "canvas-image.png";
+                a.click();
+                // 
+            }
+        });
+
+        // save image as JPG button
+        jpgBtn.addEventListener("click", function (){
+            // IE/Edge Support (PNG Only)
+            if (window.navigator.msSaveBlob){
+                window.navigator.msSaveBlob(myCanvas.msToBlob(), "canvas-image.jpg");
+            } else {
+                const a = document.createElement("a");
+
+                document.body.appendChild(a);
+                // JPG can have quality argument from 0-1
+                a.href = myCanvas.toDataURL("image/jpg", 0);
+                a.download = "canvas-image.jpg";
+                a.click();
+                // 
+            }
+        });
     </script>
 </body>
 </html>
