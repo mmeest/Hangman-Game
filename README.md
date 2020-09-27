@@ -22,7 +22,7 @@ in one compact index.html file
 * Hover on small triangle on left bottom corner - rotate screen back and forth
 * Tooltip - when hovering over 'HANGMAN' title
 * Tooltip - when hovering over text input field
-* Click on 'HANGMAN' title - fullscreen/exit fullscreen
+* Click on canvas to save it as an image
 
 ## Calculating points:
 * Maximum for the game is 100 points.
