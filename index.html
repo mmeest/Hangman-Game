@@ -21,16 +21,13 @@
             background-image: radial-gradient(rgb(245, 236, 218), rgb(94, 58, 14));
         }
         canvas{
-            /* background-color: rgb(229, 196, 151); */
             box-shadow: 10px 10px 5px #644b4b;
             border: 3px solid rgb(52, 52, 59);
             border-radius: 30px;
             background-image: radial-gradient(rgb(247, 227, 199), rgb(229, 196, 151));
             margin-left: 35%;
-            /* rotate: -7deg; */
         }
         button{
-            /* background-color:rgb(209, 235, 245); */
             background-image: radial-gradient(rgb(245, 230, 209), rgb(209, 168, 109));
             box-shadow: 7px 7px 4px #524545;
             border-radius: 10px;
@@ -61,13 +58,24 @@
             animation-name: labelAnimation;
             animation-duration: 1.2s;
         }
+        @keyframes newGame{         
+            20% {transform: rotate(2deg);}
+            80% {transform: rotate(-2deg);}
+            100% {transform: rotate(0deg);}
+        }
+        #newGame:hover{
+            animation-name: newGame;
+            animation-duration: 1s;
+        }
         input{
             border-radius: 30px;
             padding: 7px;
             box-shadow: 4px 4px 3px #644b4b inset;
         }
         .label, button{
-            color: rgb(11, 11, 116);
+            color: rgb(11, 11, 116);            
+            position: relative;
+            z-index: 100;
         }
         .textBox{
             width: 30%;
@@ -82,6 +90,7 @@
             border-width: 1px;
             box-shadow: 4px 4px 3px #644b4b inset;
             text-shadow: 3px 3px 2px #b49696;
+            position: relative;
         }
         #points{
             background-image: linear-gradient(to bottom right, red , rgb(206, 166, 118));
@@ -98,6 +107,8 @@
         #userInput{
             text-align: center;
             background-color: antiquewhite;
+            position: static;
+            z-index: -100;
         }
         .textBox:hover, #userInput:hover, #points:hover{
             background-image: radial-gradient(rgb(217, 243, 247), rgb(141, 192, 226));
@@ -123,7 +134,6 @@
         #rotate:hover {
             opacity: 0.7;
         }
-
         .tooltip {
             text-align: center;
             position: relative;
@@ -139,7 +149,6 @@
             border-radius: 7px;
             padding: 5px;
             width: 140px;
-
             /* Position the tooltip */
             position: absolute;
             top: -100%;
@@ -148,16 +157,14 @@
         .tooltip:hover .tooltiptext {
             visibility: visible;
         }
-
-    </style>
-    
+    </style>    
 </head>
 <body id="body">
     <table border="0" width="100%">
         <tr id="title">
             <td colspan="2">
-            <p class="tooltip" align="center" onclick="fullscreen()">Hangman
-                <span class="tooltiptext">Click - Fullscreen F11 - Fullscreen ctrl+r - new game</span>
+            <p class="tooltip" align="center">Hangman
+                <span class="tooltiptext">F11 - Fullscreen ctrl+r - new game</span>
             </td>
         </tr>
         <tr>
@@ -184,7 +191,6 @@
                                 <span class="tooltiptext">Use 'Enter' key as 'Submit' button.</span>
                             </div>
                             <button type="button" onclick="testLetter()" id="okButton">OK</button>
-                            <!-- <button type="button" onClick="window.location.reload();" id="nG" style = "visibility:hidden">New Game</button> -->
                         </td>
                     </tr>
                     <tr>
@@ -212,7 +218,6 @@
                 <br><br>
                 <div id="rotate" onmouseover="rotate(this)" style="color:rgb(119, 13, 13)" 
                     style="width: 24px;">▼</div>
-                <!-- <button class="btn" id="rotate" style="color:rgb(119, 13, 13)">↺</button> -->
             <p align="center"></td>
         </tr>
     </table>
@@ -220,14 +225,11 @@
     <script>
         var c = document.getElementById("myCanvas");
         var ctx  = c.getContext("2d");
-
         var points = 10; // every right guess is worth 10 points at the beginning of the game
         var totalPoints = 0;
-
         var greenColor = 0;
         var redColor = 0;
         var colorString = "rgb(255, 255, 255)"
-
         var guessNumber = 0;    
         var wrongGuesses = 0;   // for drawing
         var emptyWord = "__________";  // word to display at the beginning of the game
@@ -248,7 +250,6 @@
             "reasonable", "recognized", "regardless", "relatively", "represents", "resolution", "restaurant", "scientific",
             "specialist", "statistics", "strategies", "successful", "supporting", "techniques", "technology", "television",
             "transition", "ultimately", "understand", "university", "vegetables"];
-
         var word = words[Math.floor(Math.random()*words.length)];
         word = word.toUpperCase();
         console.log(word);
@@ -261,17 +262,6 @@
                 document.getElementById("okButton").click();
             }
         });
-
-        // spacebar for page reload
-        /* var input = document.getElementById("userInput");
-        input.addEventListener("keyup", function(event) {
-            if (event.keyCode === 32) {
-                event.preventDefault();
-                document.getElementById("nG").click();
-            }
-        }); */
-        /* ctx.style.backgroundImage = 'radial-gradient(rgb(247, 227, 111), rgb(229, 196, 111))'; */
-        /* background-image: radial-gradient(rgb(247, 227, 199), rgb(229, 196, 151)); */
         
         var userChar = "";
         function testLetter(){
@@ -282,7 +272,6 @@
             document.getElementById('userInput').value = "";
             // keep cursor on the input field
             document.getElementById("userInput").focus();
-
             if(userChar == "" || userChar == " "){
                 document.getElementById("messages").innerHTML = "Insert Character!";
             } else if(!(englishAlphabet.includes(userChar))){
@@ -295,24 +284,20 @@
                 }
                 document.getElementById("points").innerHTML = totalPoints + " / 100";
                 document.getElementById("messages").innerHTML = "Already Selected!";
-
                 pointsTextboxColoring(totalPoints);
-
                 setTimeout(function(){ document.getElementById("miss").style.transform += "scale(0.8, 0.8)"; }, 10);
                 setTimeout(function(){ document.getElementById("miss").style.transform += "scale(1.25, 1.25)"; }, 400);
-                
+
             } else if (word.includes(userChar)){
                 for (var i = 0; i < word.length; i++) {
                     console.log(word.charAt(i));
-                    if(word.charAt(i) == userChar){
-                        
+                    if(word.charAt(i) == userChar){                        
                         emptyWord = emptyWord.substring(0, i) + word.charAt(i) + emptyWord.substring(i + 1);
                         console.log(emptyWord.substring(0, i));
                         console.log(word.charAt(i));
                         console.log(emptyWord.substring(i + 1));
                     }
                 }
-
                 
                 printout = emptyWord.split("").join(" ");
                 console.log(emptyWord);
@@ -321,8 +306,8 @@
                 document.getElementById("messages").innerHTML = "Good Guess!";
                 guessedLetters += userChar;
                 document.getElementById("miss").innerHTML = alphabet_order(guessedLetters);
-
                 document.getElementById("word").style.transform += "scale(1.25, 1.25)";
+                document.getElementById("word").style.zIndex += "1000";
                 setTimeout(function(){ document.getElementById("word").style.transform += "scale(0.8, 0.8)"; }, 500);
 
                 totalPoints += points;
@@ -335,15 +320,12 @@
                     document.getElementById("okButton").style.visibility = "hidden"; 
                     document.getElementById("guess").style.display = "none";
                     document.getElementById("messages").innerHTML = "You Win!";
-
                     document.getElementById("myCanvas").style.transform = "rotate(0deg)";
                     document.getElementById("myCanvas").style.transform += "scale(1.3, 1.3)";
                     ctx.fillStyle = "rgba(0, 255, 0, 0.1)";;
                     ctx.fillRect(0, 0, 200, 300);
                     ctx.scale(2, 2);
-
                 }
-
             } else {                
                 console.log(word);
                 console.log(typeof(word));
@@ -365,18 +347,12 @@
 
                 pointsTextboxColoring(totalPoints);
 
-                /* setTimeout(function(){ document.getElementById("left").style.transform += "scale(1.25, 1.25)"; }, 100);
-                setTimeout(function(){ document.getElementById("left").style.transform += "scale(0.8, 0.8)"; }, 500); */
-
                 setTimeout(function(){ document.getElementById("myCanvas").style.transform += "scale(0.8, 0.8)"; }, 10);
                 setTimeout(function(){ document.getElementById("myCanvas").style.transform += "scale(1.25, 1.25)"; }, 500);
-
                 setTimeout(function(){ document.getElementById("myCanvas").style.transform += "rotate(-7deg)"; }, 900);
 
                 points -= 1;
-            }
-
-            
+            }            
         }
 
         // for altering background color of points output
@@ -396,11 +372,9 @@
         console.log(alphabet_order("Martin Maasik"));
         
         // already guessed letters are sorted in alphabetic order
-        function alphabet_order(str)
-            {
+        function alphabet_order(str){
                 return str.split('').sort().join('');
             }
-
         // function to draw on the canvas
         function drawing(wrongGuesses){
             if(wrongGuesses == 1){
@@ -414,58 +388,50 @@
                 ctx.lineTo(80, 60);
                 /* ctx.strokeStyle = "#FF0000"; */
                 ctx.stroke();
-            }                
-            
+            }          
             if(wrongGuesses == 2){
                 // head
                 ctx.lineWidth = 3;
                 ctx.beginPath();
                 ctx.arc(80, 70, 10, 0, 2 * Math.PI);
                 ctx.stroke(); 
-            }                
-
+            }           
             if(wrongGuesses == 3){
                 // body
                 ctx.moveTo(80, 80);
                 ctx.lineTo(80, 140);
                 ctx.stroke();
-            }                
-
+            }         
             if(wrongGuesses == 4){
                 // right arm
                 ctx.moveTo(80, 90);
                 ctx.lineTo(50, 110);
                 ctx.stroke();
-            }                
-
+            }         
             if(wrongGuesses == 5){
                 // left arm
                 ctx.moveTo(80, 90);
                 ctx.lineTo(110, 110);
                 ctx.stroke();
-            }                
-
+            }            
             if(wrongGuesses == 6){
                 // right leg
                 ctx.moveTo(80, 140);
                 ctx.lineTo(50, 170);
                 ctx.stroke();
-            }                
-
+            }              
             // final wrong guess
             if(wrongGuesses == 7){
                 // left leg
                 ctx.moveTo(80, 140);
                 ctx.lineTo(110, 170);
                 ctx.stroke();
-
                 // if game is lost and there are more than 0 points,
                 // points are divided by 2
                 if(totalPoints > 0){
                     totalPoints = Math.floor(totalPoints / 2);
                     document.getElementById("points").innerHTML = totalPoints + " / 100";
                 }
-
                 // hide user input field and button
                 document.getElementById("guessLabel").style.visibility = "hidden"; 
                 document.getElementById("okButton").style.visibility = "hidden"; 
@@ -476,38 +442,19 @@
                 document.getElementById("answer").style.visibility = "visible";
                 document.getElementById("messages").innerHTML = "Game Over!";
 
-                /* document.getElementById("myCanvas").style.transform = "rotate(7deg)"; */
-                /* document.getElementById("myCanvas").style.transform += "scale(0.5, 0.5)"; */
-
                 document.getElementById("myCanvas").style.backgroundColor = 'rgba(158, 167, 184, 0.2)';
-
-                
-                /* ctx.style.backgroundColor = "red"; */
-
-                /* grd.addColorStop(0, "red");
-                var grd = ctx.createRadialGradient(75, 50, 5, 90, 60, 100);
-                grd.addColorStop(1, "white");
-                ctx.fillStyle = grd;
-                ctx.fillRect(10, 10, 150, 100);  */
 
                 ctx.fillStyle = "rgba(255, 0, 0, 0.1)";;
                 ctx.fillRect(0, 0, 200, 300);
-
             }                
         }  
-
         // to display solution when game is lost
         var canvasRotation = -56;
         var rotationText = ""
         function solution(){
             rotationText = "rotate(" + canvasRotation + "deg)"
             document.getElementById("myCanvas").style.transform = rotationText;
-            /* document.getElementById("wordLabel").style.transform = rotationText;
-            document.getElementById("solution").style.transform = "rotate(-7deg)"; */
             document.getElementById("answer").innerHTML = word;
-            /* if(canvasRotation < -150){
-                document.getElementById("wordLabel").style.transform = rotationText;
-            } */
             if(canvasRotation < -150){
                 document.getElementById("messages").innerHTML = "Please stop spinning, i feel dizzy!";
             }
@@ -519,8 +466,7 @@
             }
 
             canvasRotation -= 7;
-        }      
-
+        }     
         // rotating whole page
         var rotation = 0;
         function rotate(){
@@ -534,34 +480,6 @@
                 document.getElementById("body").style.fontStyle = "normal";
                 document.getElementById("rotate").innerHTML = "▼";
                 rotation = 0;
-            }
-        }
-
-        // Get the documentElement (<html>) to display the page in fullscreen
-        var elem = document.documentElement;
-
-        // toggle fullscreen page
-        function fullscreen() {
-            if(window.fullScreen){
-                if (document.exitFullscreen) {
-                    document.exitFullscreen();
-                } else if (document.mozCancelFullScreen) { /* Firefox */
-                    document.mozCancelFullScreen();
-                } else if (document.webkitExitFullscreen) { /* Chrome, Safari and Opera */
-                    document.webkitExitFullscreen();
-                } else if (document.msExitFullscreen) { /* IE/Edge */
-                    document.msExitFullscreen();
-                }
-            } else {
-                if (elem.requestFullscreen) {
-                    elem.requestFullscreen();
-                } else if (elem.mozRequestFullScreen) { /* Firefox */
-                    elem.mozRequestFullScreen();
-                } else if (elem.webkitRequestFullscreen) { /* Chrome, Safari and Opera */
-                    elem.webkitRequestFullscreen();
-                } else if (elem.msRequestFullscreen) { /* IE/Edge */
-                    elem.msRequestFullscreen();
-                }
             }
         }
     </script>
