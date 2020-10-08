@@ -4,6 +4,8 @@
 Classical Hangman Game written in HTML, CSS, JS
 in one compact index.html file
 
+![](Screen.gif)
+
 ## Features:
 * Word for quessing
 * Inputfield with 'Submit'(OK) button
