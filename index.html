@@ -26,7 +26,7 @@
             border-radius: 30px;
             background-image: radial-gradient(rgb(247, 227, 199), rgb(229, 196, 151));
             margin-left: 35%;
-            margin-top: -12%;
+            margin-top: -20%;
         }
         button{
             background-image: radial-gradient(rgb(245, 230, 209), rgb(209, 168, 109));
@@ -116,7 +116,6 @@
         }
         #messages{
             text-align: center;
-            margin-top: -6%;
         }
         #solution, #answer, #canvasLabel{
             visibility: hidden;
@@ -159,9 +158,6 @@
         .tooltip:hover .tooltiptext {
             visibility: visible;
         }
-        #canvasLabel{
-            margin: 14px;
-        }
         #mainTable{
             margin-top: -70px;
             margin-bottom: -70px;
@@ -171,7 +167,8 @@
             font-weight: 700;
         }
         #canvasLabel{
-            font-size: large;
+            font-size: medium;
+            margin: 10px;
         }
     </style>    
 </head>
@@ -183,27 +180,30 @@
                 <span class="tooltiptext">F11 - Fullscreen ctrl+r - new game</span>
             </td>
         </tr>
-        <tr>
+        <tr>            
+                <div id="rotate" onmouseover="rotate(this)" style="color:rgb(119, 13, 13)" 
+                    style="width: 24px; margin-top: -90px;">▼</div>            
             <td width="240px" valign="top" align="center" width="30%">
                 <canvas id="myCanvas" width="200" height="300" class="tooltip" title="Click to save as image"></canvas>
                     <div id="canvasLabel">
                         Save Canvas as:      
-                    <table border="0" width="100%" id="canvasToImage" align="center">
-                        <tr>
-                            <td width="50%" align="center" valign="top">
-                                <img src="" id="imgPNG" width="100" height="150"
-                                style="float: center; border: 2px solid blue; border-radius: 16px;"><br>
-                                <button id="pngBtn">PNG</button>
-                            </td>
-                            <td width="50%" align="center" valign="top">
-                                <img src="" id="imgJPG" width="100" height="150"
-                                style="float: center; border: 2px solid blue; border-radius: 16px;"><br>
-                                <button id="jpgBtn">JPG</button>
-                            </td>
-                        </tr>
-                    </table>  
+                        <table border="0" width="100%" id="canvasToImage" align="center">
+                            <tr>
+                                <td width="50%" align="center" valign="top">
+                                    <img src="" id="imgPNG" width="100" height="150"
+                                    style="float: center; border: 2px solid blue; border-radius: 16px;"><br>
+                                    <button id="pngBtn">PNG</button>
+                                </td>
+                                <td width="50%" align="center" valign="top">
+                                    <img src="" id="imgJPG" width="100" height="150"
+                                    style="float: center; border: 2px solid blue; border-radius: 16px;"><br>
+                                    <button id="jpgBtn">JPG</button>
+                                </td>
+                            </tr>
+                        </table>  
                     </div>       
             </td>
+            
             <td width="70%">
                 <table border="0" width="70%" id="mainTable">
                     <tr>
@@ -243,15 +243,13 @@
                         <td width="50%" id="newGame">
                         <button type="button" onClick="window.location.reload();" id="newGame">New Game</button></td>
                     </tr>
+                    <tr>
+                        <td colspan="2" id="messages">
+                            <div id="messages">Guess a letter in the word!</div>                            
+                        <p align="center"></td>
+                    </tr>                    
                 </table>
             </td>
-        </tr>
-        <tr>
-            <td colspan="2" id="messages">
-                <div id="messages">Guess a letter in the word!</div>
-                <div id="rotate" onmouseover="rotate(this)" style="color:rgb(119, 13, 13)" 
-                    style="width: 24px;">▼</div>
-            <p align="center"></td>
         </tr>
     </table>    
 
@@ -524,6 +522,7 @@
 
         btnDisplay.addEventListener("click", function(){
             document.getElementById("canvasLabel").style.visibility = "visible";
+            /* document.getElementById("canvasLabel").style.display; */
             const dataURI = myCanvas.toDataURL();
             const dataURI2 = myCanvas.toDataURL("image/jpg");
 
